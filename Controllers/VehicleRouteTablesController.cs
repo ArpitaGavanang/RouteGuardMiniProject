@@ -25,21 +25,22 @@ namespace RouteGuardProject.Controllers
         }
 
         // GET: VehicleRouteTables/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? Id)
         {
-            if (id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
 
             var vehicleRouteTable = await _context.VehicleRouteTables
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == Id);
             if (vehicleRouteTable == null)
             {
                 return NotFound();
             }
 
             return View(vehicleRouteTable);
+           
         }
 
         // GET: VehicleRouteTables/Create
@@ -62,17 +63,18 @@ namespace RouteGuardProject.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(vehicleRouteTable);
+            //return RedirectToAction(nameof(Edit));
         }
 
         // GET: VehicleRouteTables/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? Id)
         {
-            if (id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
 
-            var vehicleRouteTable = await _context.VehicleRouteTables.FindAsync(id);
+            var vehicleRouteTable = await _context.VehicleRouteTables.FindAsync(Id);
             if (vehicleRouteTable == null)
             {
                 return NotFound();
@@ -85,9 +87,9 @@ namespace RouteGuardProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DriverName,DateOfBirth,Address,PhoneNo,LicenseNumber,LicenseDate,LicenseExpiryDate,VehicleModel,VehicleNumber,DistanceTravelByVehicle,Source,Destination,CreatedAt,CreatedBy,ModifiedAt,ModifiedBy,DummyColumn1,DummyColumn2")] VehicleRouteTable vehicleRouteTable)
+        public async Task<IActionResult> Edit(int Id, [Bind("Id,DriverName,DateOfBirth,Address,PhoneNo,LicenseNumber,LicenseDate,LicenseExpiryDate,VehicleModel,VehicleNumber,DistanceTravelByVehicle,Source,Destination,CreatedAt,CreatedBy,ModifiedAt,ModifiedBy,DummyColumn1,DummyColumn2")] VehicleRouteTable vehicleRouteTable)
         {
-            if (id != vehicleRouteTable.Id)
+            if (Id != vehicleRouteTable.Id)
             {
                 return NotFound();
             }
@@ -116,15 +118,15 @@ namespace RouteGuardProject.Controllers
         }
 
         // GET: VehicleRouteTables/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? Id)
         {
-            if (id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
 
             var vehicleRouteTable = await _context.VehicleRouteTables
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == Id);
             if (vehicleRouteTable == null)
             {
                 return NotFound();
@@ -136,9 +138,9 @@ namespace RouteGuardProject.Controllers
         // POST: VehicleRouteTables/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int Id)
         {
-            var vehicleRouteTable = await _context.VehicleRouteTables.FindAsync(id);
+            var vehicleRouteTable = await _context.VehicleRouteTables.FindAsync(Id);
             if (vehicleRouteTable != null)
             {
                 _context.VehicleRouteTables.Remove(vehicleRouteTable);
@@ -148,9 +150,9 @@ namespace RouteGuardProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VehicleRouteTableExists(int id)
+        private bool VehicleRouteTableExists(int Id)
         {
-            return _context.VehicleRouteTables.Any(e => e.Id == id);
+            return _context.VehicleRouteTables.Any(e => e.Id == Id);
         }
     }
 }

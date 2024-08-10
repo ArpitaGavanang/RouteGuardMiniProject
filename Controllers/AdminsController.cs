@@ -53,7 +53,7 @@ namespace RouteGuardProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Department,Designation,Dob,Role,JoinDate,Permissions,CreatedBy,CreatedAt")] Admin admin)
+        public async Task<IActionResult> Create([Bind("Id,Name,Department,Designation,Dob,Role,JoinDate,Permissions,CreatedBy,CreatedAt,Password")] Admin admin)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace RouteGuardProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Department,Designation,Dob,Role,JoinDate,Permissions,CreatedBy,CreatedAt")] Admin admin)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Department,Designation,Dob,Role,JoinDate,Permissions,CreatedBy,CreatedAt,Password")] Admin admin)
         {
             if (id != admin.Id)
             {
@@ -116,15 +116,15 @@ namespace RouteGuardProject.Controllers
         }
 
         // GET: Admins/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? Id)
         {
-            if (id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
 
             var admin = await _context.Admins
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == Id);
             if (admin == null)
             {
                 return NotFound();
@@ -136,9 +136,9 @@ namespace RouteGuardProject.Controllers
         // POST: Admins/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int Id)
         {
-            var admin = await _context.Admins.FindAsync(id);
+            var admin = await _context.Admins.FindAsync(Id);
             if (admin != null)
             {
                 _context.Admins.Remove(admin);
@@ -148,9 +148,9 @@ namespace RouteGuardProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AdminExists(int id)
+        private bool AdminExists(int Id)
         {
-            return _context.Admins.Any(e => e.Id == id);
+            return _context.Admins.Any(e => e.Id == Id);
         }
     }
 }
